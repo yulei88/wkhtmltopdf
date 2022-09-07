@@ -325,7 +325,12 @@ void Outline::fillHeaderFooterParms(int page, QHash<QString, QString> & parms, c
 	parms["topage"] = QString::number(off+d->pageCount);
 	parms["page" ] = QString::number(page+off);
 	parms["webpage"] = ps.page;
-	parms["section" ] = d->hfCache[0][page]?d->hfCache[0][page]->value:QString("");
+    parms["section" ] = d->hfCache[0][page]?d->hfCache[0][page]->value:QString("");
+    QString section2 = d->hfCache[0][page]?d->hfCache[0][page]->value:QString("");
+    if ( section2.length() > 25 ) {
+        section2 = section2.left(22)+"...";
+    }
+    parms["section2" ] = section2;
 	parms["subsection" ] = d->hfCache[1][page]?d->hfCache[1][page]->value:QString("");
 	parms["subsubsection" ] = d->hfCache[2][page]?d->hfCache[2][page]->value:QString("");
 }
