@@ -112,8 +112,12 @@ void OutlinePrivate::fillChildAnchors(OutlineItem * item, QHash<QString, QWebEle
 
 void OutlinePrivate::outlineChildren(OutlineItem * item, QPrinter * printer, int level) {
 	if (level + 1 > settings.outlineDepth) return;
-	foreach (OutlineItem * i, item->children) {
-		printer->beginSectionOutline(i->value, i->anchor);
+    foreach (OutlineItem * i, item->children) {
+        QString tag=i->element.attribute("tag", "");
+        if ( tag != "" ) {
+            continue;
+        }
+        printer->beginSectionOutline(i->value, i->anchor);
 		outlineChildren(i, printer, level+1);
 		printer->endSectionOutline();
 	}
