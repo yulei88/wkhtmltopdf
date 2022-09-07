@@ -130,7 +130,17 @@ QString escape(QString str) {
 void OutlinePrivate::dumpChildren(QTextStream & stream, const QList<OutlineItem *> & items, int level) const {
 	foreach (OutlineItem * item, items) {
 		for (int i=0; i < level; ++i) stream << "  ";
-		stream << "<item title=\"" << escape(item->value) << "\" page=\"" << (item->page + prefixSum[item->document]+ settings.pageOffset) << "\" link=\"" << escape(item->anchor) << "\" backLink=\"" << escape(item->tocAnchor) << "\"";
+//		stream << "<item title=\"" << escape(item->value) << "\" page=\"" << (item->page + prefixSum[item->document]+ settings.pageOffset) << "\" link=\"" << escape(item->anchor) << "\" backLink=\"" << escape(item->tocAnchor) << "\"";
+        stream << "<item title=\"" << escape(item->value) <<
+                  "\" page=\"" << (item->page + prefixSum[item->document]+ settings.pageOffset) <<
+                  "\" id=\"" << (item->element.attribute("id", "")) <<
+                  "\" tag=\"" << (item->element.attribute("tag", "")) <<
+                  "\" class=\"" << (item->element.attribute("class", "")) <<
+                  "\" subtitle=\"" << (item->element.attribute("subtitle", "")) <<
+                  "\" source=\"" << (item->element.attribute("source", "")) <<
+                  "\" sourceurl=\"" << (item->element.attribute("sourceurl", "")) <<
+                  "\" link=\"" << escape(item->anchor) << "\" backLink=\"" << escape(item->tocAnchor) <<
+                  "\"";
 		if (item->children.empty())
 			stream << "/>" << endl;
 		else {
