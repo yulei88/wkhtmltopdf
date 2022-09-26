@@ -22,6 +22,12 @@
 
 我增加了[section2]，如果章节名超过20个字符，则截取17个然后加"..."于尾部
 
+# 页眉和页脚的增加了topage1
+
+原先wkhtmltopdf的[topage]指代总页数，但可能程序有问题，总页数有时候会少一页
+
+所以临时增加[topage1]比[topage]大1，算是以上问题的临时解决方案
+
 
 
 wkhtmltopdf and wkhtmltoimage
